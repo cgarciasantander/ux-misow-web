@@ -18,13 +18,13 @@ export default function Home() {
           <Grid2 container direction="row">
             <Grid2 size={5}>
               <Typography variant="h1" component="h1" sx={{ mb: "24px" }}>
-                {CONTENT_TEXT.TITLE}
+                {CONTENT_TEXT.PAGE.TITLE}
               </Typography>
               <Typography color="textSecondary" variant="h5" component="p" sx={{ mb: "24px" }}>
-                {CONTENT_TEXT.SUBTITLE}
+                {CONTENT_TEXT.PAGE.SUBTITLE}
               </Typography>
               <Button variant="contained">
-                Crear cuenta
+                {CONTENT_TEXT.PAGE.SIGN_UP}
               </Button>
             </Grid2>
             <Grid2 size={7}>

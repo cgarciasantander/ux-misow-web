@@ -3,11 +3,11 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "@/app/theme";
-import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
 import { Navbar } from "@/components/navbar/navbar";
 import { Footer } from "@/components/footer/footer";
+import { Box } from "@mui/material";
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -30,13 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <InitColorSchemeScript attribute="class" />
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Navbar />
-            {children}
-            <Footer />
+            <Box minHeight="100vh" position="relative">
+              <Navbar />
+              {children}
+              <Footer />
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

@@ -1,8 +1,10 @@
-export default async function Dependientes() {
+import { Container } from "@mui/material";
+
+export default async function IniciarSesion() {
    
     return (
-      <div>
-        <h1>Lista de dependientes</h1>
-      </div>
+      <Container maxWidth="xl">
+        <h1>Title</h1>
+      </Container>
     );
   }

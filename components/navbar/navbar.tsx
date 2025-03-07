@@ -1,4 +1,6 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import Link from "next/link";
+import { CONTENT_TEXT } from "./content";
 
 export function Navbar() {
   return (
@@ -8,11 +10,11 @@ export function Navbar() {
           ParentCheck
         </Typography>
         <Box flexGrow={1} justifyContent="end" display="flex" gap="16px">
-            <Button variant="text" disableElevation>
-                Iniciar sesión
+            <Button variant="text" disableElevation LinkComponent={Link} href="/iniciar-sesion">
+                {CONTENT_TEXT.LOGIN}
             </Button>
             <Button variant="contained" disableElevation>
-                Crear cuenta
+                {CONTENT_TEXT.SIGN_UP}
             </Button>
         </Box>
       </Toolbar>
