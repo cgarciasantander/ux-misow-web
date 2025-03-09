@@ -5,8 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "@/app/theme";
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
-import { Navbar } from "@/components/navbar/navbar";
-import { Footer } from "@/components/footer/footer";
+import { Navbar } from "@/components/navbar/Navbar";
+import { Footer } from "@/components/footer/Footer";
 import { Box } from "@mui/material";
 
 const roboto = Roboto({

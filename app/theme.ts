@@ -1,6 +1,12 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    official: true;
+  }
+}
+
 const theme = createTheme({
   colorSchemes: { light: true },
   cssVariables: true,
@@ -35,7 +41,15 @@ const theme = createTheme({
         root: {
           textTransform: "unset",
           padding: "10px 24px",
-          borderRadius: "50px"
+          borderRadius: "50px",
+          variants: [{
+            props: {
+              variant: "official",
+            },
+            style: {
+              backgroundColor: '#F2F2F2'
+            },
+          }]
         },
       },
     }
