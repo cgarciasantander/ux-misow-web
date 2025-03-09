@@ -73,7 +73,7 @@ export function Navbar(props: NavbarProps) {
             ParentCheck
           </Typography>
         </ButtonBase>
-        <Box flexGrow={1} justifyContent="end" display="flex" gap="16px">
+        <Box flexGrow={1} justifyContent="end" display="flex" gap="8px">
           {renderButtons()}
         </Box>
       </Toolbar>

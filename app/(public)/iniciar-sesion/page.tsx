@@ -1,11 +1,20 @@
 "use client";
 import { GoogleBrand } from "@/components/icons/GoogleBrand";
-import { Box, Button, Container, Divider, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Typography,
+} from "@mui/material";
 import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
 import Link from "next/link";
+import { useUserContext } from "@/hooks/useUser";
+import { redirect } from "next/navigation";
 
 type FormValues = {
   email: {
@@ -19,6 +28,8 @@ type FormValues = {
 };
 
 export default function IniciarSesion() {
+  const { state, actions } = useUserContext();
+  const [error, setError] = useState(false);
   const [form, setForm] = useState<FormValues>({
     email: {
       value: null,
@@ -39,7 +50,7 @@ export default function IniciarSesion() {
       ...form,
       email: {
         value,
-        error: !value.trim() ? "Correo electrónico es requerido." : null,
+        error: !value.trim() ? CONTENT_TEXT.PAGE.EMAIL_REQUIRED : null,
       },
     });
   };
@@ -53,15 +64,30 @@ export default function IniciarSesion() {
       ...form,
       password: {
         value,
-        error: !value.trim() ? "Contraseña es requerida." : null,
+        error: !value.trim() ? CONTENT_TEXT.PAGE.PASSWORD_REQUIRED : null,
       },
     });
+  };
+
+  const handleSubmit = async () => {
+    if (form.email.value && form.password.value) {
+      const result = await actions?.login(
+        form.email.value,
+        form.password.value
+      );
+
+      if (result) {
+        redirect("/dependientes");
+      } else {
+        setError(true);
+      }
+    }
   };
 
   const isValid = !!(form.email.value?.trim() && form.password.value?.trim());
 
   return (
-    <Container maxWidth="xs" sx={{ mt: "170px" }}>
+    <Container maxWidth="xs" sx={{ mt: "130px" }}>
       <Typography variant="h4" component="h1" sx={{ mb: "48px" }}>
         {CONTENT_TEXT.PAGE.LOGIN}
       </Typography>
@@ -85,7 +111,7 @@ export default function IniciarSesion() {
         onChange={handleEmailChange}
         type="email"
         variant="outlined"
-        label="Correo electrónico"
+        label={CONTENT_TEXT.PAGE.EMAIL} 
         sx={{
           mb: "32px",
         }}
@@ -97,22 +123,29 @@ export default function IniciarSesion() {
         helperText={form.password.error ?? null}
         onChange={handlePasswordChange}
         variant="outlined"
-        label="Contraseña"
+        label={CONTENT_TEXT.PAGE.PASSWORD} 
         sx={{
           mb: "32px",
         }}
       />
       <Box display="flex" gap="8px">
         <Button
-          href="/dependientes"
-          LinkComponent={Link}
+          loading={state?.loading}
           disabled={!isValid}
           variant="contained"
+          onClick={handleSubmit}
         >
           {CONTENT_TEXT.PAGE.LOGIN}
         </Button>
         <Button>{CONTENT_TEXT.PAGE.FORGOT_PASSWORD}</Button>
       </Box>
+      {
+        error && (
+          <Alert sx={{ mt: "32px" }} severity="error">
+            {CONTENT_TEXT.PAGE.WRONG_EMAIL_OR_PASSWORD} 
+          </Alert>
+        )
+      }
     </Container>
   );
 }

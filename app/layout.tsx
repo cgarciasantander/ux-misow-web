@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "@/app/theme";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { UserProvider } from "@/hooks/useUser";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -29,7 +30,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <UserProvider>{children}</UserProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

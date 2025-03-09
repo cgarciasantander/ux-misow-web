@@ -2,6 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import DependientesInicialImg from "@/public/dependientes-inicial.png";
 import Image from "next/image";
 import { Add } from "@mui/icons-material";
+import { CONTENT_TEXT } from "./content";
 
 export default async function Dependientes() {
   const children = [];
@@ -18,10 +19,10 @@ export default async function Dependientes() {
             />
           </Box>
           <Typography sx={{ mb: "32px" }} variant="h4" component="h1">
-            Comienza creando una lista de dependientes
+            {CONTENT_TEXT.PAGE.START_ADDING_CHILDREN}
           </Typography>
           <Button startIcon={<Add />} variant="contained">
-            Agregar dependiente
+            {CONTENT_TEXT.PAGE.ADD_CHILD}
           </Button>
         </Box>
       </Container>
