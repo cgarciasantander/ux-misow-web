@@ -1,27 +1,21 @@
 "use client";
 import { GoogleBrand } from "@/components/icons/GoogleBrand";
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
-
+import { TextField } from "@/components/field/TextField";
+import Link from "next/link";
 
 type FormValues = {
   email: {
-    value?: string | null,
-    error?: string | null,
-  },
+    value?: string | null;
+    error?: string | null;
+  };
   password: {
-    value?: string | null,
-    error?: string | null,
-  },
+    value?: string | null;
+    error?: string | null;
+  };
 };
 
 export default function IniciarSesion() {
@@ -36,38 +30,48 @@ export default function IniciarSesion() {
     },
   });
 
-  const handleEmailChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (event): void => {
+  const handleEmailChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event): void => {
     const value = event.target.value;
 
     setForm({
       ...form,
       email: {
         value,
-        error: !value.trim() ? "Correo electrónico es requerido." : null
-      }
-    })
-  }
+        error: !value.trim() ? "Correo electrónico es requerido." : null,
+      },
+    });
+  };
 
-  const handlePasswordChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>  = (event) => {
+  const handlePasswordChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
     const value = event.target.value;
 
     setForm({
       ...form,
       password: {
         value,
-        error: !value.trim() ? "Contraseña es requerido." : null
-      }
-    })
-  }
+        error: !value.trim() ? "Contraseña es requerida." : null,
+      },
+    });
+  };
 
-  const isValid = !!(form.email.value?.trim() && form.password.value?.trim())
-  console.log(isValid);
+  const isValid = !!(form.email.value?.trim() && form.password.value?.trim());
+
   return (
     <Container maxWidth="xs" sx={{ mt: "170px" }}>
       <Typography variant="h4" component="h1" sx={{ mb: "48px" }}>
         {CONTENT_TEXT.PAGE.LOGIN}
       </Typography>
-      <Button startIcon={<GoogleBrand />} fullWidth variant="official">
+      <Button
+        startIcon={<GoogleBrand />}
+        fullWidth
+        variant="official"
+        href="/dependientes"
+        LinkComponent={Link}
+      >
         {CONTENT_TEXT.PAGE.LOGIN_WITH_GOOGLE}
       </Button>
       <Divider textAlign="center" sx={{ mb: "24px", mt: "24px" }}>
@@ -99,7 +103,12 @@ export default function IniciarSesion() {
         }}
       />
       <Box display="flex" gap="8px">
-        <Button disabled={!isValid} variant="contained">
+        <Button
+          href="/dependientes"
+          LinkComponent={Link}
+          disabled={!isValid}
+          variant="contained"
+        >
           {CONTENT_TEXT.PAGE.LOGIN}
         </Button>
         <Button>{CONTENT_TEXT.PAGE.FORGOT_PASSWORD}</Button>
