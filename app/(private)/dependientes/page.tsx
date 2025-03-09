@@ -11,8 +11,12 @@ export default async function Dependientes() {
       <Container maxWidth="xs" sx={{ mt: "170px" }}>
         <Box textAlign="center">
           <Image src={DependientesInicialImg} alt="Dependientes" width={370} />
-          <Typography variant="h4" component="h1">Comienza creando una lista de dependientes</Typography>
-          <Button startIcon={<Add />} variant="contained">Agregar dependiente</Button>
+          <Typography sx={{ mb: "32px" }} variant="h4" component="h1">
+            Comienza creando una lista de dependientes
+          </Typography>
+          <Button startIcon={<Add />} variant="contained">
+            Agregar dependiente
+          </Button>
         </Box>
       </Container>
     );

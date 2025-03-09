@@ -2,10 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 
 export function Footer() {
   return (
-    <Container maxWidth="xl" sx={{
-      position: 'absolute',
-      bottom: 0
-    }}>
+    <Container maxWidth="xl" disableGutters>
       <Box paddingTop="20px" paddingBottom="20px" display="flex" gap="4px" alignItems="center">
         <Button>Inicio</Button>
         <Typography color="primary" component="span">•</Typography>

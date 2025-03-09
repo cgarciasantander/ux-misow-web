@@ -1,7 +1,15 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  ButtonBase,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { CONTENT_TEXT } from "./content";
 import { AccountCircle, Logout } from "@mui/icons-material";
+import { Logo } from "../logo/Logo";
 
 type NavbarProps = {
   auth?: boolean;
@@ -46,10 +54,25 @@ export function Navbar(props: NavbarProps) {
 
   return (
     <AppBar color="transparent" position="static" elevation={0}>
-      <Toolbar variant="regular">
-        <Typography variant="h6" color="inherit" component="div">
-          ParentCheck
-        </Typography>
+      <Toolbar
+        variant="regular"
+        sx={{ paddingTop: "32px", paddingBottom: "32px" }}
+      >
+        <ButtonBase
+          href="/"
+          disableRipple
+          LinkComponent={Link}
+          sx={{
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+          }}
+        >
+          <Logo />
+          <Typography variant="h6" color="inherit" component="div">
+            ParentCheck
+          </Typography>
+        </ButtonBase>
         <Box flexGrow={1} justifyContent="end" display="flex" gap="16px">
           {renderButtons()}
         </Box>

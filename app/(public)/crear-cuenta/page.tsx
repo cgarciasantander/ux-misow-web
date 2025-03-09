@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 
-export default async function IniciarSesion() {
+export default async function CrearCuenta() {
    
     return (
       <Container maxWidth="xl">

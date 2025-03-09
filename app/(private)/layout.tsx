@@ -8,9 +8,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Box minHeight="100vh" position="relative">
-      <Navbar auth />
-      {children}
+    <Box
+      minHeight="100vh"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Navbar auth/>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        flex="1"
+      >
+        {children}
+      </Box>
     </Box>
   );
 }
