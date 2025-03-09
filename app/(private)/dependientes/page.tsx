@@ -8,9 +8,15 @@ export default async function Dependientes() {
 
   if (!children.length) {
     return (
-      <Container maxWidth="xs" sx={{ mt: "170px" }}>
+      <Container maxWidth="xs" sx={{ mt: "130px" }}>
         <Box textAlign="center">
-          <Image src={DependientesInicialImg} alt="Dependientes" width={370} />
+          <Box sx={{ mb: "32px" }}>
+            <Image
+              src={DependientesInicialImg}
+              alt="Dependientes"
+              width={370}
+            />
+          </Box>
           <Typography sx={{ mb: "32px" }} variant="h4" component="h1">
             Comienza creando una lista de dependientes
           </Typography>
