@@ -130,7 +130,7 @@ export default function CrearCuenta() {
 
   return (
     <Container maxWidth="xs" sx={{ mt: "130px" }}>
-      <Typography variant="h4" component="h1" sx={{ mb: "48px" }}>
+      <Typography variant="h4" component="h1" sx={{ mb: "40px" }}>
         {CONTENT_TEXT.PAGE.CREATE_ACCOUNT}
       </Typography>
       <Button

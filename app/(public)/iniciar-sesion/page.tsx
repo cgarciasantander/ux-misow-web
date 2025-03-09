@@ -88,7 +88,7 @@ export default function IniciarSesion() {
 
   return (
     <Container maxWidth="xs" sx={{ mt: "130px" }}>
-      <Typography variant="h4" component="h1" sx={{ mb: "48px" }}>
+      <Typography variant="h4" component="h1" sx={{ mb: "40px" }}>
         {CONTENT_TEXT.PAGE.LOGIN}
       </Typography>
       <Button

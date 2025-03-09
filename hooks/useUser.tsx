@@ -10,7 +10,7 @@ import { User } from "./types";
 
 type UserDispatch =
   | { type: "TOGGLE_LOADING" }
-  | { type: "SET_USER"; user: User }
+  | { type: "SET_USER"; user: User | null }
   | { type: "SET_USERS"; users: Map<string, User> }
   | { type: "RESTORE_SESSION"; state: UserState };
 
@@ -19,11 +19,12 @@ type UserActions = {
   createUser: (
     user: Pick<User, "email" | "firstName" | "lastName" | "password">
   ) => Promise<User>;
+  logout: () => void;
 };
 
 type UserState = {
   loading: boolean;
-  user?: User;
+  user?: User | null;
   users: Map<string, User>;
 };
 
@@ -112,7 +113,7 @@ export function useUser() {
 
           dispatch({ type: "TOGGLE_LOADING" });
           resolve(valid);
-        }, 2500);
+        }, 1000);
       });
     },
     createUser: async (payload): Promise<User> => {
@@ -137,8 +138,11 @@ export function useUser() {
           dispatch({ type: "SET_USERS", users });
 
           resolve(user);
-        }, 2500);
+        }, 1000);
       });
+    },
+    logout: async () => {
+      dispatch({ type: "SET_USER", user: null });
     },
   };
 
