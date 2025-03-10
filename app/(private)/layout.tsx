@@ -2,7 +2,7 @@ import * as React from "react";
 import { Navbar } from "@/components/navbar/Navbar";
 import { Box } from "@mui/material";
 
-export default function RootLayout({
+export default function PrivateLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,7 +19,6 @@ export default function RootLayout({
       <Box
         display="flex"
         flexDirection="column"
-        justifyContent="space-between"
         flex="1"
       >
         {children}

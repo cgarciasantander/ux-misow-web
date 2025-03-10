@@ -5,7 +5,7 @@ import {
   PropsWithChildren,
   useContext,
 } from "react";
-import { User } from "./types";
+import { Dependent, User } from "./types";
 
 type UserDispatch =
   | { type: "TOGGLE_LOADING" }
@@ -18,6 +18,7 @@ type UserActions = {
   createUser: (
     user: Pick<User, "email" | "firstName" | "lastName" | "password">
   ) => Promise<User>;
+  createDependent: (dependent: Dependent) => Promise<Dependent>;
   logout: () => void;
 };
 
@@ -105,9 +106,44 @@ export function useUser() {
 
           const users = state.users.set(user.email, user);
           dispatch({ type: "SET_USERS", users });
-          dispatch({ type: "TOGGLE_LOADING" })
+          dispatch({ type: "TOGGLE_LOADING" });
 
           resolve(user);
+        }, 1000);
+      });
+    },
+    createDependent: (dependent: Dependent): Promise<Dependent> => {
+      return new Promise((resolve, reject) => {
+        dispatch({ type: "TOGGLE_LOADING" });
+
+        setTimeout(() => {
+          if (!state.user) {
+            reject(new Error("El usuario no ha iniciado sesion."));
+            return;
+          }
+
+          if (
+            state.user.dependents.some(
+              (d) =>
+                d.name === dependent.name && d.birthDate === dependent.birthDate
+            )
+          ) {
+            reject(new Error("Ya existe un dependiente con el mismo nombre y fecha de nacimiento."));
+            return;
+          }
+
+          const user = {
+            ...state.user,
+            dependents: [...state.user.dependents, dependent],
+          };
+
+          const users = state.users.set(user.email, user);
+
+          dispatch({ type: "SET_USER", user });
+          dispatch({ type: "SET_USERS", users });
+          dispatch({ type: "TOGGLE_LOADING" });
+
+          resolve(dependent);
         }, 1000);
       });
     },

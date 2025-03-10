@@ -1,6 +1,19 @@
+import { MouseEvent } from "react";
 import { Upload } from "@mui/icons-material";
-import { Avatar, Box, Button, Card, CardContent, InputLabel, styled } from "@mui/material";
-import { ChangeEventHandler, useEffect, useState } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  InputLabel,
+  styled,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { ChangeEventHandler, useEffect, useRef, useState } from "react";
+
+const VALID_MIMETYPES = ["image/jpeg", "image/png", "image/gif"];
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -15,31 +28,41 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 type AvatarFieldProps = {
-  value?: File | null;
-  onChange: ChangeEventHandler<HTMLInputElement>
+  stringAvatar?: string | null;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 export function AvatarField(props: AvatarFieldProps) {
-  const [previewSrc, setPreviewSrc] = useState<string>();
+  const [previewSrc, setPreviewSrc] = useState<string | undefined>();
+  const ref = useRef<HTMLInputElement | null>(null);
+  const file = ref.current?.files?.item(0);
 
   useEffect(() => {
-    if (props.value) {
+    if (file) {
       const reader = new FileReader();
-      
+
       reader.addEventListener("load", (event) => {
         const path = event.target?.result;
 
         if (path && typeof path === "string") {
           setPreviewSrc(path);
         }
-      });    
-      reader.readAsDataURL(props.value);
+      });
+      reader.readAsDataURL(file);
+    } else {
+      setPreviewSrc(undefined);
     }
-  }, [props.value]);
+  }, [file]);
 
-  const deleteFile = () => {
-    
-  }
+  const removeFile = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    if (ref.current?.files) {
+      ref.current.files = new DataTransfer().files;
+      const synthetic = new Event("change", { bubbles: true });
+      ref.current.dispatchEvent(synthetic);
+    }
+  };
 
   return (
     <Card
@@ -52,23 +75,68 @@ export function AvatarField(props: AvatarFieldProps) {
       }}
     >
       <CardContent>
-        <Box display="flex" gap="16px">
-          <Avatar sx={{ width: "67px", height: "67px" }} src={previewSrc} />
-          <Box>
-            <InputLabel sx={{ mb: "8px" }}>Imagen de perfil</InputLabel>
-            <Button
-              component="label"
-              role={undefined}
-              variant="contained"
-              startIcon={<Upload />}
-              sx={{ mr: "8px" }}
+        <Box display="flex" gap="16px" alignItems="center">
+          <Avatar
+            sx={{
+              width: "72px",
+              height: "72px",
+              bgcolor: "#B8EAFF",
+              color: (theme) => theme.palette.primary.dark,
+            }}
+            src={previewSrc}
+          >
+            {props.stringAvatar}
+          </Avatar>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              gap: "8px",
+              overflow: "hidden",
+            }}
+          >
+            <InputLabel
+              sx={{
+                fontWeight: (theme) => theme.typography.fontWeightBold,
+              }}
             >
-              Seleccionar
-              <VisuallyHiddenInput type="file" onChange={props.onChange} />
-            </Button>
-            <Button disabled={!props.value} variant="outlined">
-              Eliminar
-            </Button>
+              Imagen de perfil
+            </InputLabel>
+            <Box sx={{ display: "flex", gap: "8px" }}>
+              <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                startIcon={<Upload />}
+              >
+                Seleccionar
+                <VisuallyHiddenInput
+                  ref={ref}
+                  type="file"
+                  onChange={props.onChange}
+                  accept={VALID_MIMETYPES.join(",")}
+                />
+              </Button>
+              <Button onClick={removeFile} disabled={!file} variant="outlined">
+                Eliminar
+              </Button>
+            </Box>
+            {file && (
+              <Tooltip title={file.name}>
+                <Typography
+                  sx={{
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden"
+                  }}
+                  component="div"
+                  variant="caption"
+                >
+                  {file.name}
+                </Typography>
+              </Tooltip>
+            )}
           </Box>
         </Box>
       </CardContent>

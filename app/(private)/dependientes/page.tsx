@@ -1,14 +1,16 @@
+"use client";
 import { Box, Button, Container, Typography } from "@mui/material";
 import DependientesInicialImg from "@/public/dependientes-inicial.png";
 import Image from "next/image";
 import { Add } from "@mui/icons-material";
 import { CONTENT_TEXT } from "./content";
 import Link from "next/link";
+import { useUserContext } from "@/hooks/useUser";
 
-export default async function Dependientes() {
-  const children = [];
-
-  if (!children.length) {
+export default function Dependientes() {
+  const { state } = useUserContext();
+  console.log(state?.user?.dependents);
+  if (!state?.user?.dependents.length) {
     return (
       <Container maxWidth="xs" sx={{ mt: "130px" }}>
         <Box textAlign="center">

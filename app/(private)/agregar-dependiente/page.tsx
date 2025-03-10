@@ -1,13 +1,8 @@
 "use client";
 import {
   Alert,
-  Avatar,
   Box,
   Button,
-  Card,
-  CardContent,
-  Container,
-  InputLabel,
   Typography,
 } from "@mui/material";
 import { CONTENT_TEXT } from "./content";
@@ -15,7 +10,7 @@ import { ChangeEventHandler, useState } from "react";
 import { TextField } from "@/components/field/TextField";
 import { useUserContext } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
-import { Add, Upload } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import { AvatarField } from "@/components/field/AvatarField";
 
 type FormValues = {
@@ -70,7 +65,7 @@ export default function AgregarDependiente() {
     HTMLInputElement | HTMLTextAreaElement
   > = (event): void => {
     const value = event.target.value;
-
+    console.log(value);
     setForm({
       ...form,
       birthDate: {
@@ -95,28 +90,25 @@ export default function AgregarDependiente() {
   };
 
   const handleSubmit = async () => {
-    // try {
-    //   setError(false);
-    //   await actions?.createUser({
-    //     firstName: form.firstName.value as string,
-    //     lastName: form.lastName.value as string,
-    //     email: form.email.value as string,
-    //     password: form.password.value as string,
-    //   });
-    //   router.push("/confirmar-correo");
-    // } catch {
-    //   setError(true);
-    // }
+    try {
+      setError(false);
+      await actions?.createDependent({
+        name: form.name.value as string,
+        birthDate: form.birthDate.value as string,
+        picture: await toBase64(form.picture.value as File),
+      });
+
+      router.push("/dependientes");
+    } catch (e) {
+      console.log(e);
+      setError(true);
+    }
   };
 
-  const isValid = !!(
-    form.name.value?.trim() &&
-    form.birthDate.value?.trim() &&
-    form.picture.value
-  );
+  const isValid = !!(form.name.value?.trim() && form.birthDate.value?.trim());
 
   return (
-    <Container maxWidth="xs" sx={{ mt: "130px" }}>
+    <>
       <Typography variant="h4" component="h1" sx={{ mb: "16px" }}>
         {CONTENT_TEXT.PAGE.ADD_DEPENDENT}
       </Typography>
@@ -128,11 +120,13 @@ export default function AgregarDependiente() {
       >
         {CONTENT_TEXT.PAGE.INSTRUCTIONS}
       </Typography>
-      <AvatarField value={form.picture.value} onChange={handleFileChange} />
+      <AvatarField
+        stringAvatar={form.name.value?.at(0)}
+        onChange={handleFileChange}
+      />
       <TextField
         fullWidth
         required
-        value={form.name.value}
         error={!!form.name.error}
         helperText={form.name.error ?? null}
         onChange={handleNameChange}
@@ -146,7 +140,11 @@ export default function AgregarDependiente() {
       <TextField
         fullWidth
         required
-        placeholder="dd/mm/yyyy"
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
         error={!!form.birthDate.error}
         helperText={form.birthDate.error ?? null}
         onChange={handleBirthDateChange}
@@ -170,9 +168,17 @@ export default function AgregarDependiente() {
       </Box>
       {error && (
         <Alert sx={{ mt: "32px" }} severity="error">
-          El correo electrónico ya se encuentra registrado.
+          Ya existe un dependiente con el mismo nombre y fecha de nacimiento.
         </Alert>
       )}
-    </Container>
+    </>
   );
 }
+
+const toBase64 = (file: File): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+  });

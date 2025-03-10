@@ -7,5 +7,7 @@ export type User = {
 };
 
 export type Dependent = {
-    name: string
+    name: string;
+    birthDate: string;
+    picture: string;
 }

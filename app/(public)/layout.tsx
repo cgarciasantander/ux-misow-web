@@ -3,7 +3,7 @@ import { Navbar } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { Box } from "@mui/material";
 
-export default function RootLayout({
+export default function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

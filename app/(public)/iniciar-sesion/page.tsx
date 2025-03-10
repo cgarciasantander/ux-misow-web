@@ -12,7 +12,6 @@ import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
-import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
 import { redirect } from "next/navigation";
 
@@ -84,6 +83,14 @@ export default function IniciarSesion() {
     }
   };
 
+  const handlerGoogleLogin = async () => {
+    const result = await actions?.login("john@example.com", "example");
+
+    if (result) {
+      redirect("/dependientes");
+    }
+  };
+
   const isValid = !!(form.email.value?.trim() && form.password.value?.trim());
 
   return (
@@ -95,8 +102,7 @@ export default function IniciarSesion() {
         startIcon={<GoogleBrand />}
         fullWidth
         variant="official"
-        href="/dependientes"
-        LinkComponent={Link}
+        onClick={handlerGoogleLogin}
       >
         {CONTENT_TEXT.PAGE.LOGIN_WITH_GOOGLE}
       </Button>
@@ -111,7 +117,7 @@ export default function IniciarSesion() {
         onChange={handleEmailChange}
         type="email"
         variant="outlined"
-        label={CONTENT_TEXT.PAGE.EMAIL} 
+        label={CONTENT_TEXT.PAGE.EMAIL}
         sx={{
           mb: "32px",
         }}
@@ -123,7 +129,7 @@ export default function IniciarSesion() {
         helperText={form.password.error ?? null}
         onChange={handlePasswordChange}
         variant="outlined"
-        label={CONTENT_TEXT.PAGE.PASSWORD} 
+        label={CONTENT_TEXT.PAGE.PASSWORD}
         sx={{
           mb: "32px",
         }}
@@ -139,13 +145,11 @@ export default function IniciarSesion() {
         </Button>
         <Button>{CONTENT_TEXT.PAGE.FORGOT_PASSWORD}</Button>
       </Box>
-      {
-        error && (
-          <Alert sx={{ mt: "32px" }} severity="error">
-            {CONTENT_TEXT.PAGE.WRONG_EMAIL_OR_PASSWORD} 
-          </Alert>
-        )
-      }
+      {error && (
+        <Alert sx={{ mt: "32px" }} severity="error">
+          {CONTENT_TEXT.PAGE.WRONG_EMAIL_OR_PASSWORD}
+        </Alert>
+      )}
     </Container>
   );
 }
