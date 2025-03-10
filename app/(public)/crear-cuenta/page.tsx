@@ -1,13 +1,20 @@
 "use client";
 import { GoogleBrand } from "@/components/icons/GoogleBrand";
-import { Alert, Box, Button, Container, Divider, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Typography,
+} from "@mui/material";
 import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
 import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   firstName: {
@@ -31,6 +38,7 @@ type FormValues = {
 export default function CrearCuenta() {
   const { state, actions } = useUserContext();
   const [error, setError] = useState(false);
+  const router = useRouter();
   const [form, setForm] = useState<FormValues>({
     firstName: {
       value: null,
@@ -108,6 +116,8 @@ export default function CrearCuenta() {
 
   const handleSubmit = async () => {
     try {
+      setError(false);
+
       await actions?.createUser({
         firstName: form.firstName.value as string,
         lastName: form.lastName.value as string,
@@ -115,11 +125,11 @@ export default function CrearCuenta() {
         password: form.password.value as string,
       });
 
-      redirect('/iniciar-sesion');
+      router.push("/confirmar-correo");
     } catch {
       setError(true);
     }
-  }
+  };
 
   const isValid = !!(
     form.firstName.value?.trim() &&
@@ -202,13 +212,11 @@ export default function CrearCuenta() {
           {CONTENT_TEXT.PAGE.CREATE_ACCOUNT}
         </Button>
       </Box>
-      {
-        error && (
-          <Alert sx={{ mt: "32px" }} severity="error">
-            El correo electrónico ya se encuentra registrado. 
-          </Alert>
-        )
-      }
+      {error && (
+        <Alert sx={{ mt: "32px" }} severity="error">
+          El correo electrónico ya se encuentra registrado.
+        </Alert>
+      )}
     </Container>
   );
 }

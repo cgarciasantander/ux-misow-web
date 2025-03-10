@@ -2,14 +2,16 @@
 import { Container, Typography } from "@mui/material";
 import { CONTENT_TEXT } from "./content";
 import { useEffect } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ConfirmarCorreo() {
+  const router = useRouter();
+
   useEffect(() => {
     setTimeout(() => {
-      redirect('/correo-confirmado')
-    }, 5000);
-  }, [])
+      router.push('/correo-confirmado')
+    }, 10000);
+  }, [router])
 
   return (
     <Container maxWidth="xs" sx={{ mt: "130px" }}>

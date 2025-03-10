@@ -4,7 +4,6 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
-  useEffect,
 } from "react";
 import { User } from "./types";
 
@@ -69,35 +68,6 @@ const defaultState: UserState = {
 export function useUser() {
   const [state, dispatch] = useReducer(UserReducer, defaultState);
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("users");
-    
-      if (stored) {
-        const users: User[] = JSON.parse(stored);
-  
-        dispatch({
-          type: "SET_USERS",
-          users: new Map(users.map((user) => [user.email, user])),
-        });
-      }
-    } catch {
-      localStorage.clear();
-      location.reload();
-    }
-  }, []);
-
-  useEffect(() => {
-    const onbeforeunloadFn = () => {
-      localStorage.setItem("users", JSON.stringify([...state.users.values()]));
-    };
-
-    window.addEventListener("beforeunload", onbeforeunloadFn);
-    return () => {
-      window.removeEventListener("beforeunload", onbeforeunloadFn);
-    };
-  }, [state.users]);
-
   const actions: UserActions = {
     login: async (email: string, password: string): Promise<boolean> => {
       return new Promise((resolve) => {
@@ -120,13 +90,12 @@ export function useUser() {
       return new Promise((resolve, reject) => {
         dispatch({ type: "TOGGLE_LOADING" });
 
-        const registered = state.users.has(payload.email);
-
         setTimeout(() => {
-          dispatch({ type: "TOGGLE_LOADING" });
+          const registered = state.users.has(payload.email);
 
           if (registered) {
-            return reject(new Error("El usuario ya está registrado"));
+            reject(new Error("El usuario ya está registrado"));
+            return;
           }
 
           const user = {
@@ -136,6 +105,7 @@ export function useUser() {
 
           const users = state.users.set(user.email, user);
           dispatch({ type: "SET_USERS", users });
+          dispatch({ type: "TOGGLE_LOADING" })
 
           resolve(user);
         }, 1000);
