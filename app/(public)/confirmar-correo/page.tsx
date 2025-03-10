@@ -10,7 +10,7 @@ export default function ConfirmarCorreo() {
   useEffect(() => {
     setTimeout(() => {
       router.push('/correo-confirmado')
-    }, 10000);
+    }, 30000);
   }, [router])
 
   return (
