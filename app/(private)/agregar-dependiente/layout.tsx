@@ -10,7 +10,7 @@ export default function AgregarDependienteLayout({
 }>) {
   return (
     <Box>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" disableGutters>
         <Breadcrumbs>
           <Button
             startIcon={<ArrowBack />}

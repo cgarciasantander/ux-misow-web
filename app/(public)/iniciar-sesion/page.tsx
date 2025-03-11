@@ -101,6 +101,7 @@ export default function IniciarSesion() {
       <Button
         startIcon={<GoogleBrand />}
         fullWidth
+        loading={state?.loading}
         variant="official"
         onClick={handlerGoogleLogin}
       >
