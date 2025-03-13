@@ -3,6 +3,10 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import DependientesInicialImg from "@/public/dependientes-inicial.png";
 import Image from "next/image";
 import { Add } from "@mui/icons-material";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import PauseIcon from '@mui/icons-material/Pause';
 import { CONTENT_TEXT } from "./content";
 import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
@@ -19,21 +23,24 @@ import Paper from '@mui/material/Paper';
 
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
+  title: string,
+  subtitle: string,
+  dosis: string,
 ) {
-  return { name, calories, fat, carbs, protein };
+  return { title, subtitle, dosis };
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData(
+    'Tylenol 500mg cada 8 horas durante 5 días', 
+    'Fecha de inicio 01/01/2025 09:00 PM - Fecha de finalización 05/01/2025 09:00 PM', 
+    '1/15 dosis'
+  ),
+  createData(
+    'Ibuprofeno 500mg cada 8 horas durante 5 días', 
+    'Fecha de inicio 01/01/2025 09:00 PM - Fecha de finalización 05/01/2025 09:00 PM',
+    '1/15 dosis'
+  ),
 ];
 
 
@@ -69,7 +76,7 @@ export default function Dependientes() {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{ display: "flex", gap: "8px", marginBotton: "100" }}>
+      <Box sx={{ display: "flex", gap: "8px", mb: "25px" }}>
         <Typography variant="h4" component="h1" sx={{ mb: "16px" }}>
           {CONTENT_TEXT.PAGE.MY_DEPENDENT}
         </Typography>
@@ -80,7 +87,7 @@ export default function Dependientes() {
             disabled={false} 
             variant="outlined"             
             startIcon={<Add />}>
-            Agregar dependiente
+            {CONTENT_TEXT.PAGE.ADD_CHILD}
           </Button>
         </Container>
       </Box>
@@ -97,28 +104,50 @@ function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Stack direction="row" spacing={2} sx={{ justifyContent: "flex-start",  alignItems: "center", }}>
+              <Stack direction="row" spacing={2} sx={{ justifyContent: "flex-start",  alignItems: "center", fontWeight: 400, color: "#171C1F", fontSize: "16px" }}>
                 <Avatar>JD</Avatar>
-                <p>John Doe, 5 años</p> 
+                <p>John Doe, 5 años</p>
               </Stack>
             </TableCell>
-            <TableCell align="right">Agregar Alarma</TableCell>
-            <TableCell align="right">Importar prescripción</TableCell>
-            <TableCell align="right">Historial de dosis</TableCell>
+            <TableCell sx={{ color: "#08677F", fontWeight: 500 }} align="right">
+              <Button 
+                variant="text"  
+                startIcon={<NotificationsNoneIcon />}  
+                LinkComponent={Link}
+                href="/agregar-alarma">
+                  Agregar Alarma
+              </Button>               
+            </TableCell>
+            <TableCell sx={{ color: "#08677F", fontWeight: 500,  width: 240 }} align="right">
+              <Button variant="text"  startIcon={<FileUploadOutlinedIcon />}>Importar prescripción</Button>
+            </TableCell>
+            <TableCell sx={{ color: "#08677F", fontWeight: 500,  width: 240 }} align="right">
+              <Button variant="text"  startIcon={<TimelineOutlinedIcon />} disabled>Historial de dosis</Button>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.title}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell>
+                <Stack direction="column" spacing={0.5}>
+                  <p style={{ color: "#08677F", fontWeight: 400, fontSize: '16px'}}>{row.title}</p>
+                  <p style={{ color: "#455E91", fontWeight: 400, fontSize: '14px'}}>{row.subtitle}</p>
+                </Stack>
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell rowSpan={1} />
+              <TableCell align="right" sx={{ color: "black", fontWeight: 500,  width: 240 }}>{row.dosis}</TableCell>
+              <TableCell align="right" sx={{ color: "#08677F",  width: 240 }} >
+                <Button
+                  startIcon={<PauseIcon />}
+                  variant="contained"
+                >
+                  {CONTENT_TEXT.PAGE.STOP_DOSIS}
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
