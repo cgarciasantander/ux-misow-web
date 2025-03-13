@@ -1,4 +1,3 @@
-export const CONTENT_TEXT = {
   PAGE: {
     TITLE: "Cuidando a tus hijos, una dosis a la vez",
     SUBTITLE:
