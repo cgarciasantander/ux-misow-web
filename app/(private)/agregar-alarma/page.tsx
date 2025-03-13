@@ -2,7 +2,12 @@ import {
   Container,
   Stack,
   Typography,
+  Box
 } from "@mui/material";
+
+import Image from "next/image";
+
+import QRImg from "@/public/qr_image.png"
 import { CONTENT_TEXT } from "./content";
 
 const DownloadCard = function ({ title }) {
@@ -14,6 +19,13 @@ const DownloadCard = function ({ title }) {
       <Typography sx={{ mt: "10px", color: "black", fontSize: "12px", fontWeight: 400 }}>
         Escanea el código QR o descarga la aplicación en Apple App Store.
       </Typography>
+      <Box>
+      <Image
+          src={QRImg}
+          alt="hero"
+          style={{ height: "auto", width: "100%" }}
+        />
+      </Box>
     </Container>
   )
 }
