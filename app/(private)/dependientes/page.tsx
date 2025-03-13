@@ -47,7 +47,7 @@ const rows = [
 export default function Dependientes() {
   const { state } = useUserContext();
   console.log(state?.user?.dependents);
-  if (state?.user?.dependents.length) {
+  if (!state?.user?.dependents.length) {
     return (
       <Container maxWidth="xs" sx={{ mt: "130px" }}>
         <Box textAlign="center">
