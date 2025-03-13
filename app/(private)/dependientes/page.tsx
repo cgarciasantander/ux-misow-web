@@ -7,7 +7,8 @@ import { CONTENT_TEXT } from "./content";
 import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
 
-
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -68,7 +69,7 @@ export default function Dependientes() {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{ display: "flex", gap: "8px" }}>
+      <Box sx={{ display: "flex", gap: "8px", marginBotton: "100" }}>
         <Typography variant="h4" component="h1" sx={{ mb: "16px" }}>
           {CONTENT_TEXT.PAGE.MY_DEPENDENT}
         </Typography>
@@ -92,14 +93,18 @@ export default function Dependientes() {
 function BasicTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650, backgroundColor: "#F5FAFD" }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>
+              <Stack direction="row" spacing={2} sx={{ justifyContent: "flex-start",  alignItems: "center", }}>
+                <Avatar>JD</Avatar>
+                <p>John Doe, 5 años</p> 
+              </Stack>
+            </TableCell>
+            <TableCell align="right">Agregar Alarma</TableCell>
+            <TableCell align="right">Importar prescripción</TableCell>
+            <TableCell align="right">Historial de dosis</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -114,7 +119,6 @@ function BasicTable() {
               <TableCell align="right">{row.calories}</TableCell>
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
