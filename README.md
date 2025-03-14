@@ -9,7 +9,7 @@ Funcionalidades soportadas:
 4. Creación de dependientes.
 
 ## Video de demostración
-[![Demo](https://img.youtube.com/vi/zJnxGMYoH9k/hqdefault.jpg)](https://www.youtube.com/embed/zJnxGMYoH9k)
+[![Demo](https://img.youtube.com/vi/zJnxGMYoH9k/hqdefault.jpg)](https://www.youtube.com/embed/zJnxGMYoH9k)</br>
 (Haz click en este video para ver una demostración de la instalación y uso del proyecto)
 
 ## Requisitos previos
