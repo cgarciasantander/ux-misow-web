@@ -17,23 +17,23 @@ Asegúrate de tener instalados los siguientes programas antes de comenzar:
 ## Instalación
 
 1. Clona este repositorio:
-    ```bash
-    git clone https://github.com/cgarciasantander/ux-misow-web.git
-    ```
-2. Navega al directorio del proyecto:
-    ```bash
-    cd ux-misow-web
-    ```
+```bash
+git clone https://github.com/cgarciasantander/ux-misow-web.git
+```
+2. Abre el directorio del proyecto:
+```bash
+cd ux-misow-web
+```
 3. Instala las dependencias:
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
 ## Ejecución en Desarrollo
 Ejecuta el servidor de desarrollo:
 
 ```bash
-    npm run dev
+npm run dev
 ```
 
 Accede a la aplicación en tu navegador en http://localhost:3000.
@@ -52,21 +52,21 @@ npm start
 ```
 
 ## Scripts Disponibles
-`dev`: Inicia el servidor de desarrollo.
-`build`: Crea una versión optimizada para producción.
-`start`: Inicia la aplicación en modo producción.
-`lint`: Ejecuta linters para mantener el código limpio.
+- `dev`: Inicia el servidor de desarrollo.
+- `build`: Crea una versión optimizada para producción.
+- `start`: Inicia la aplicación en modo producción.
+- `lint`: Ejecuta linters para mantener el código limpio.
 
 ## Estructura del Proyecto
 Una breve descripción de la estructura de carpetas del proyecto:
-
-- /app            # Directorio raiz de la aplicación
-- /app/(private)  # Directorio con rutas privadas
-- /app/(public)   # Directorio con rutas publicas
-- /public         # Archivos estáticos
-- /components     # Componentes reutilizables
-- /hooks          # Hooks reutilizables
-
+```
+/app            # Directorio raiz de la aplicación
+/app/(private)  # Directorio con rutas privadas
+/app/(public)   # Directorio con rutas publicas
+/public         # Archivos estáticos
+/components     # Componentes reutilizables
+/hooks          # Hooks reutilizables
+```
 ## Rutas disponibles
 |Ruta|Descripcion|
 |-|-|
