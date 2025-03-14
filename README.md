@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ParentCheck Web
+ParentCheck Web es una aplicación web integral diseñada para impulsar la marca. Su propósito principal es atraer clientes y convertirlos en usuarios activos, siendo el puente ideal para potenciar el uso de nuestra aplicación móvil.
 
-## Getting Started
+Funcionalidades soportadas:
 
-First, run the development server:
+1. Administrar las páginas de mercadeo de la marca.
+2. Registro de usuarios.
+3. Autenticación y autogestión de cuentas de usuarios.
+4. Creación de dependientes.
+
+## Requisitos previos
+
+Asegúrate de tener instalados los siguientes programas antes de comenzar:
+- [Node.js](https://nodejs.org/) (v16 o superior recomendado)
+- [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
+
+## Instalación
+
+1. Clona este repositorio:
+    ```bash
+    git clone https://github.com/usuario/nombre-del-repositorio.git
+    ```
+2. Navega al directorio del proyecto:
+    ```bash
+    cd nombre-del-repositorio
+    ```
+3. Instala las dependencias:
+    ```bash
+    npm install
+    ```
+    o si usas Yarn:
+    ```bash
+    yarn install
+    ```
+
+## Ejecución en Desarrollo
+Ejecuta el servidor de desarrollo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+o si usas Yarn:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Accede a la aplicación en tu navegador en http://localhost:3000.
 
-## Learn More
+## Compilar en proyecto para producción
+Para crear una versión optimizada para producción:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+o con Yarn:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+yarn build
+```
 
-## Deploy on Vercel
+Luego, para ejecutar la aplicación en modo producción:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+o:
+
+```bash
+yarn start
+```
+
+## Scripts Disponibles
+`dev`: Inicia el servidor de desarrollo.
+`build`: Crea una versión optimizada para producción.
+`start`: Inicia la aplicación en modo producción.
+`lint`: Ejecuta linters para mantener el código limpio.
+
+## Estructura del Proyecto
+Una breve descripción de la estructura de carpetas del proyecto:
+
+/app            # Directorio raiz de la aplicación
+/app/(private)  # Directorio con rutas privadas
+/app/(public)   # Directorio con rutas publicas
+/public         # Archivos estáticos
+/components     # Componentes reutilizables
+/hooks          # Hooks reutilizables
