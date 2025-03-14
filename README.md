@@ -8,7 +8,8 @@ Funcionalidades soportadas:
 3. Autenticación y autogestión de cuentas de usuarios.
 4. Creación de dependientes.
 
-## Demostración
+## Video de demostración
+Haz click en este video para ver una demostración de la instalación y uso del proyecto
 [![Demo](https://img.youtube.com/vi/zJnxGMYoH9k/hqdefault.jpg)](https://www.youtube.com/embed/zJnxGMYoH9k)
 
 ## Requisitos previos
