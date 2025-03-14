@@ -12,25 +12,21 @@ Funcionalidades soportadas:
 
 Asegúrate de tener instalados los siguientes programas antes de comenzar:
 - [Node.js](https://nodejs.org/) (v16 o superior recomendado)
-- [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 
 ## Instalación
 
 1. Clona este repositorio:
     ```bash
-    git clone https://github.com/usuario/nombre-del-repositorio.git
+    git clone https://github.com/cgarciasantander/ux-misow-web.git
     ```
 2. Navega al directorio del proyecto:
     ```bash
-    cd nombre-del-repositorio
+    cd ux-misow-web
     ```
 3. Instala las dependencias:
     ```bash
     npm install
-    ```
-    o si usas Yarn:
-    ```bash
-    yarn install
     ```
 
 ## Ejecución en Desarrollo
@@ -38,12 +34,6 @@ Ejecuta el servidor de desarrollo:
 
 ```bash
     npm run dev
-```
-
-o si usas Yarn:
-
-```bash
-yarn dev
 ```
 
 Accede a la aplicación en tu navegador en http://localhost:3000.
@@ -55,22 +45,10 @@ Para crear una versión optimizada para producción:
 npm run build
 ```
 
-o con Yarn:
-
-```bash
-yarn build
-```
-
 Luego, para ejecutar la aplicación en modo producción:
 
 ```bash
 npm start
-```
-
-o:
-
-```bash
-yarn start
 ```
 
 ## Scripts Disponibles
@@ -88,3 +66,14 @@ Una breve descripción de la estructura de carpetas del proyecto:
 /public         # Archivos estáticos
 /components     # Componentes reutilizables
 /hooks          # Hooks reutilizables
+
+## Rutas disponibles
+http://localhost:3000/                       # Página de inicio de la aplicación 
+http://localhost:3000/crear-cuenta           # Formulario para crear cuenta de usuario
+http://localhost:3000/confirmar-cuenta       # Instrucciones para confirmar por correo electrónico
+http://localhost:3000/cuenta-confirmada      # Ruta de confirmación de cuenta
+http://localhost:3000/iniciar-sesion         # Autenticación de usuario
+http://localhost:3000/dependientes           # Lista de dependientes
+http://localhost:3000/agregar-dependiente    # Formulario para crear dependientes
+http://localhost:3000/agregar-alarma         # Página para descargar aplicación movil
+http://localhost:3000/cuenta                 # Página para administrar datos de usuario y cambio de contraseña
