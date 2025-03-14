@@ -59,7 +59,7 @@ const defaultState: UserState = {
         firstName: "John",
         lastName: "Doe",
         email: "john@example.com",
-        password: "example",
+        password: "12345",
         dependents: [],
       },
     ],
