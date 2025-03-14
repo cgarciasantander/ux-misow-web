@@ -8,18 +8,6 @@ Funcionalidades soportadas:
 3. Autenticación y autogestión de cuentas de usuarios.
 4. Creación de dependientes.
 
-## Usuario de prueba
-La aplicación posee un usuario de prueba por default que te permitirá iniciar sesión con google o a través de usuario / contraseña.
-
-```json
-{
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "john@example.com",
-    "password": "12345",
-}
-```
-
 ## Requisitos previos
 
 Asegúrate de tener instalados los siguientes programas antes de comenzar:
@@ -79,6 +67,19 @@ Una breve descripción de la estructura de carpetas del proyecto:
 /components     # Componentes reutilizables
 /hooks          # Hooks reutilizables
 ```
+
+## Usuario de prueba
+La aplicación posee un usuario de prueba por default que te permitirá iniciar sesión con google o a través de usuario / contraseña.
+
+```json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com",
+    "password": "12345",
+}
+```
+
 ## Rutas disponibles
 |Ruta|Descripcion|
 |-|-|
