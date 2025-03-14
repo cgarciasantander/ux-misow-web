@@ -60,20 +60,20 @@ npm start
 ## Estructura del Proyecto
 Una breve descripción de la estructura de carpetas del proyecto:
 
-/app            # Directorio raiz de la aplicación
-/app/(private)  # Directorio con rutas privadas
-/app/(public)   # Directorio con rutas publicas
-/public         # Archivos estáticos
-/components     # Componentes reutilizables
-/hooks          # Hooks reutilizables
+- /app            # Directorio raiz de la aplicación
+- /app/(private)  # Directorio con rutas privadas
+- /app/(public)   # Directorio con rutas publicas
+- /public         # Archivos estáticos
+- /components     # Componentes reutilizables
+- /hooks          # Hooks reutilizables
 
 ## Rutas disponibles
-http://localhost:3000/                       # Página de inicio de la aplicación 
-http://localhost:3000/crear-cuenta           # Formulario para crear cuenta de usuario
-http://localhost:3000/confirmar-cuenta       # Instrucciones para confirmar por correo electrónico
-http://localhost:3000/cuenta-confirmada      # Ruta de confirmación de cuenta
-http://localhost:3000/iniciar-sesion         # Autenticación de usuario
-http://localhost:3000/dependientes           # Lista de dependientes
-http://localhost:3000/agregar-dependiente    # Formulario para crear dependientes
-http://localhost:3000/agregar-alarma         # Página para descargar aplicación movil
-http://localhost:3000/cuenta                 # Página para administrar datos de usuario y cambio de contraseña
+- http://localhost:3000/                       # Página de inicio de la aplicación 
+- http://localhost:3000/crear-cuenta           # Formulario para crear cuenta de usuario
+- http://localhost:3000/confirmar-cuenta       # Instrucciones para confirmar por correo electrónico
+- http://localhost:3000/cuenta-confirmada      # Ruta de confirmación de cuenta
+- http://localhost:3000/iniciar-sesion         # Autenticación de usuario
+- http://localhost:3000/dependientes           # Lista de dependientes
+- http://localhost:3000/agregar-dependiente    # Formulario para crear dependientes
+- http://localhost:3000/agregar-alarma         # Página para descargar aplicación movil
+- http://localhost:3000/cuenta                 # Página para administrar datos de usuario y cambio de contraseña
