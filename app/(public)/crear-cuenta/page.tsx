@@ -12,7 +12,6 @@ import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
-import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
 
@@ -114,6 +113,15 @@ export default function CrearCuenta() {
     });
   };
 
+  const handleGoogleSignup = async () => {
+    const result = await actions?.login("john@example.com", "12345");
+
+    if (result) {
+      router.push("/dependientes");
+    }
+  };
+
+
   const handleSubmit = async () => {
     try {
       setError(false);
@@ -131,6 +139,7 @@ export default function CrearCuenta() {
     }
   };
 
+
   const isValid = !!(
     form.firstName.value?.trim() &&
     form.lastName.value?.trim() &&
@@ -147,8 +156,7 @@ export default function CrearCuenta() {
         startIcon={<GoogleBrand />}
         fullWidth
         variant="official"
-        href="/dependientes"
-        LinkComponent={Link}
+        onClick={handleGoogleSignup}
       >
         {CONTENT_TEXT.PAGE.CREATE_ACCOUNT_WITH_GOOGLE}
       </Button>

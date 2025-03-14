@@ -13,7 +13,7 @@ import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
 import { useUserContext } from "@/hooks/useUser";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   email: {
@@ -28,6 +28,7 @@ type FormValues = {
 
 export default function IniciarSesion() {
   const { state, actions } = useUserContext();
+  const router = useRouter();
   const [error, setError] = useState(false);
   const [form, setForm] = useState<FormValues>({
     email: {
@@ -76,18 +77,18 @@ export default function IniciarSesion() {
       );
 
       if (result) {
-        redirect("/dependientes");
+        router.push("/dependientes");
       } else {
         setError(true);
       }
     }
   };
 
-  const handlerGoogleLogin = async () => {
-    const result = await actions?.login("john@example.com", "example");
+  const handleGoogleLogin = async () => {
+    const result = await actions?.login("john@example.com", "12345");
 
     if (result) {
-      redirect("/dependientes");
+      router.push("/dependientes");
     }
   };
 
@@ -103,7 +104,7 @@ export default function IniciarSesion() {
         fullWidth
         loading={state?.loading}
         variant="official"
-        onClick={handlerGoogleLogin}
+        onClick={handleGoogleLogin}
       >
         {CONTENT_TEXT.PAGE.LOGIN_WITH_GOOGLE}
       </Button>
