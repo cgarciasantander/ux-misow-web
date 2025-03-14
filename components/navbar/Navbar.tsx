@@ -13,6 +13,7 @@ import { Logo } from "../logo/Logo";
 
 type NavbarProps = {
   auth?: boolean;
+  onLogout?: () => void;
 };
 
 export function Navbar(props: NavbarProps) {
@@ -31,8 +32,7 @@ export function Navbar(props: NavbarProps) {
           <Button
             variant="text"
             startIcon={<Logout />}
-            LinkComponent={Link}
-            href="/"
+            onClick={props.onLogout}
           >
             {CONTENT_TEXT.LOG_OUT}
           </Button>

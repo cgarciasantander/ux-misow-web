@@ -3,15 +3,12 @@ import {
   Alert,
   Box,
   Button,
-  Container,
-  Divider,
   Typography,
 } from "@mui/material";
 import { CONTENT_TEXT } from "./content";
 import { ChangeEventHandler, useState } from "react";
 import { PasswordField } from "@/components/field/PasswordField";
 import { TextField } from "@/components/field/TextField";
-import Link from "next/link";
 import { useUserContext } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
 
@@ -39,20 +36,20 @@ type FormValues = {
 };
 
 export default function CrearCuenta() {
-  const { state, actions } = useUserContext();
+  const { state } = useUserContext();
   const [error, setError] = useState(false);
   const router = useRouter();
   const [form, setForm] = useState<FormValues>({
     firstName: {
-      value: null,
+      value: state?.user?.firstName ?? null,
       error: null,
     },
     lastName: {
-      value: null,
+      value: state?.user?.lastName ?? null,
       error: null,
     },
     email: {
-      value: null,
+      value: state?.user?.email ?? null,
       error: null,
     },
     newPassword: {
@@ -154,7 +151,7 @@ export default function CrearCuenta() {
   );
 
   return (
-    <Container maxWidth="xs" sx={{ mt: "130px" }}>
+    <>
       <Typography variant="h4" component="h1" sx={{ mb: "40px" }}>
         Mi Cuenta
       </Typography>
@@ -168,6 +165,7 @@ export default function CrearCuenta() {
           type="text"
           variant="outlined"
           label={CONTENT_TEXT.PAGE.FIRST_NAME}
+          defaultValue={form.firstName.value}
         />
         <TextField
           fullWidth
@@ -178,6 +176,7 @@ export default function CrearCuenta() {
           type="text"
           variant="outlined"
           label={CONTENT_TEXT.PAGE.LAST_NAME}
+          defaultValue={form.lastName.value}
         />
       </Box>
       <TextField
@@ -188,6 +187,7 @@ export default function CrearCuenta() {
         type="email"
         variant="outlined"
         label={CONTENT_TEXT.PAGE.EMAIL}
+        defaultValue={form.email.value}
         sx={{
           mb: "32px",
         }}
@@ -249,7 +249,7 @@ export default function CrearCuenta() {
           Cambiar contraseña
         </Button>
       </Box>
-    </Container>
+    </>
   );
 }
 

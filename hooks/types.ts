@@ -9,5 +9,5 @@ export type User = {
 export type Dependent = {
     name: string;
     birthDate: string;
-    picture: string;
+    picture?: string;
 }

@@ -95,7 +95,7 @@ export default function AgregarDependiente() {
       await actions?.createDependent({
         name: form.name.value as string,
         birthDate: form.birthDate.value as string,
-        picture: await toBase64(form.picture.value as File),
+        picture: form.picture.value ? await toBase64(form.picture.value as File) : undefined,
       });
 
       router.push("/dependientes");
